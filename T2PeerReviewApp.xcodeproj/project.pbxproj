@@ -56,15 +56,39 @@
 		F72BA23C27DFB0920052AFE0 /* T2PeerReviewApp */ = {
 			isa = PBXGroup;
 			children = (
-				F72BA23D27DFB0920052AFE0 /* AppDelegate.swift */,
-				F72BA23F27DFB0920052AFE0 /* SceneDelegate.swift */,
+				F72BA25327DFB0B80052AFE0 /* App */,
+				F72BA25227DFB0A50052AFE0 /* Storyboards */,
+				F72BA25127DFB09C0052AFE0 /* ViewControllers */,
 				F72BA24127DFB0920052AFE0 /* ViewController.swift */,
-				F72BA24327DFB0920052AFE0 /* Main.storyboard */,
-				F72BA24627DFB0930052AFE0 /* Assets.xcassets */,
-				F72BA24827DFB0930052AFE0 /* LaunchScreen.storyboard */,
-				F72BA24B27DFB0930052AFE0 /* Info.plist */,
 			);
 			path = T2PeerReviewApp;
+			sourceTree = "<group>";
+		};
+		F72BA25127DFB09C0052AFE0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F72BA25227DFB0A50052AFE0 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F72BA24327DFB0920052AFE0 /* Main.storyboard */,
+				F72BA24827DFB0930052AFE0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		F72BA25327DFB0B80052AFE0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F72BA23D27DFB0920052AFE0 /* AppDelegate.swift */,
+				F72BA23F27DFB0920052AFE0 /* SceneDelegate.swift */,
+				F72BA24627DFB0930052AFE0 /* Assets.xcassets */,
+				F72BA24B27DFB0930052AFE0 /* Info.plist */,
+			);
+			name = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
