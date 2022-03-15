@@ -4,10 +4,10 @@ import UIKit
 
 
 
-#warning("VAlignedLabel is implemented or deleted according to UI/UX standards of \"DescriptionViewController\" vc.")
-@available(*, deprecated, message: "VAlignedLabel is for demo purpose.")
+//MARK: "VAlignedLabel is implemented or deleted according to UI/UX standards of \"DescriptionViewController\" vc.")
 class VAlignedLabel: UILabel {
 
+	@available(*, unavailable, message: "This property observer is for demo purpose.")
 	var verticalAlignment:VerticalAlignment = .middle{
 		didSet{
 			//let txt = self.text ?? ""
@@ -49,7 +49,7 @@ class VAlignedLabel: UILabel {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		self.verticalAlignment = .top
+		//self.verticalAlignment = .top
 	}
 	
 	enum VerticalAlignment{
