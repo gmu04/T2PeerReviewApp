@@ -8,8 +8,8 @@ class DescriptionViewController: UIViewController {
 	init() {
 		super.init(nibName: nil, bundle: nil)
 		
-//		setupView()
-//		configureConstraints()
+		//		setupView()
+		//		configureConstraints()
 	}
 	
 	required init?(coder _: NSCoder) {
@@ -29,86 +29,114 @@ class DescriptionViewController: UIViewController {
 		view.backgroundColor = .white
 		view.addSubview(mainStackView)
 		
-		#warning("2022-03-14: gokhan: According to given body string, scroll view seems to be necessary")
-		//FIXME: Please check the view by uncommenting the following line
+		scrollView.addSubview(bodyLabel)
+		
+		
+		headerLabel.text = "Some Header"
+		bodyLabel.text = "Some long body"
+		
+#warning("2022-03-14: gokhan: when bodyLabel string is longer than screen height, scroll view is necessary")
+		//MARK: Please check the view by uncommenting the following line
 		//bodyLabel.text = loremIpsumGenerator()
+		
+		
 	}
 	
 	private func configureConstraints() {
 		
-		//FIXME: gokhan: 2022-03-14: bottomAnchor makes the body text in the middle, which is probably not acceptable.
-		// Easy way to solve it by removing the constraint. Or, another option is to make a custom label which draws a text at the top is another solution.
-		
-		//TODO: safeAreaLayoutGuide is used for padding
+#warning("2022-03-14: gokhan: safeAreaLayoutGuide needs to be used")
 		let mainStackViewConstraints = [
 			mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
 			mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
 			mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-			//mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20)
-		]
+			mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20)]
+		NSLayoutConstraint.activate(mainStackViewConstraints)
 		
 		
-		NSLayoutConstraint.activate(mainStackViewConstraints + [
-			bodyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)])
-		
-		//TODO: gokhan: 2022-03-14: following line needed to be activated - It is added to the above line
+#warning("gokhan: 2022-03-14: following line needs to be activated, besides body label needs to be aligned according to scroll view.")
 		//bodyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+		
+		NSLayoutConstraint.activate([
+			bodyLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
+			bodyLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+			bodyLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+			bodyLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+			bodyLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+		])
 	}
 	
 	
-
+	
 	//MARK: - Properties & attributes
 	
 	private lazy var mainStackView: UIStackView = {
-		let stackView = UIStackView(arrangedSubviews: [headerLabel, bodyLabel])
+		let stackView = UIStackView(arrangedSubviews: [headerLabel, scrollView])//bodyLabel
 		
-		#warning("""
-		Explanation-1:
-		gokhan, 2022-03-14: set translatesAutoresizingMaskIntoConstraints as false in all controls,
-			otherwise configureConstraints function won't work (constraints are overridden)
-		""")
+#warning("""
+Explanation-1:
+gokhan, 2022-03-14: set translatesAutoresizingMaskIntoConstraints as false in all controls,
+otherwise configureConstraints function won't work (constraints are overridden)
+""")
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		stackView.axis = .vertical
 		stackView.distribution = .fill
 		stackView.spacing = 10
 		stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+		//stackView.backgroundColor = .yellow
 		return stackView
 	}()
 	private lazy var headerLabel: UILabel = {
 		let label = UILabel()
-		//MARK: gokhan, 2022-03-14: see Explanation-1
+		//MARK: warning: please refer to Explanation-1
 		label.translatesAutoresizingMaskIntoConstraints = false
 		
-		//TODO: gokhan, 2022-03-14: Header might be single line. Scale factor is added. (header lenght needs to checked before assinging text)
+		//TODO: gokhan, 2022-03-14: Header is supposed to be a single line.
 		label.numberOfLines = 1
+		
+		//MARK: gokhan, 2022-03-14: Scale factor is added. (header lenght needs to checked before assinging text)
 		label.minimumScaleFactor = 0.5
 		
-		//MARK: if font size is defined by UX/UI guy, 16 point is too small for header. I chancged it to .title1 (& make it bold)
+		//MARK: gokhan, 2022-03-14: if font size is defined by UX/UI guy, 16 point is too small for header. I chancged it to .title1 (& make it bold)
 		label.font = UIFont.preferredFont(forTextStyle: .title1)
 		label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
-			//.systemFont(ofSize: 16, weight: .bold)
+		//.systemFont(ofSize: 16, weight: .bold)
 		
-		label.text = "Some Header"
+		//MARK: gokhan, 2022-03-14: better to assign string another place such as viewDidLoad
+		//label.text = "Some Header"
 		label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+		//label.backgroundColor = .systemBlue
 		return label
 	}()
 	
 	private lazy var bodyLabel: UILabel = {
 		let label = UILabel()
-		//MARK: gokhan, 2022-03-14: see Explanation-1
+		//MARK: warning: please refer to Explanation-1
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.numberOfLines = 0
 		
-		//MARK: if font size is defined by UX/UI guy, 12 point is too small. I commented it.
+		//MARK: if font size is given by UX/UI guy, 12 point is too small.
 		//label.font = .systemFont(ofSize: 12)
-		label.text = "Some long body"
+		//MARK: gokhan, 2022-03-14: better to assign string another place such as viewDidLoad
+		//label.text = "Some long body"
 		label.setContentHuggingPriority(.defaultLow, for: .vertical)
 		label.textAlignment = .left
+		//label.backgroundColor = .systemPurple
 		return label
+	}()
+	
+	private lazy var scrollView: UIScrollView = {
+		let scrollView = UIScrollView()
+		scrollView.translatesAutoresizingMaskIntoConstraints = false
+		//scrollView.backgroundColor = .systemPink
+		return scrollView
 	}()
 	
 }
 
+
+
+
+//MARK: -
 
 extension DescriptionViewController{
 	
